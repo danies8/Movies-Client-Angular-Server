@@ -1,0 +1,133 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+      <div class="card-body"
+      *ngIf="movie">
+         <form class="form-horizontal" novalidate (ngSubmit)="saveMovie()" #editForm="ngForm">
+           <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="nameId">Name</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="nameId"
+                     type="text"
+                     placeholder="Name (required)"
+                     required
+                     [(ngModel)]=movie.movieData.name
+                     name="name"
+                     #nameVar="ngModel"
+                     [ngClass]="{'is-invalid': (nameVar.touched || 
+                                                nameVar.dirty ||
+                                                movie.movieData._id !== '0') && 
+                                                !nameVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="nameVar.errors?.required">
+                  Name is required.
+                </span>
+               </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="genresId">Genres</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="genresId"
+                     type="text"
+                     placeholder="Genres (required)"
+                     required
+                      [(ngModel)]=movie.movieData.genres
+                     name="genres"
+                     #genresVar="ngModel"
+                     [ngClass]="{'is-invalid': (genresVar.touched || 
+                                                genresVar.dirty ||
+                                                movie.movieData._id !== '0') && 
+                                                !genresVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="genresVar.errors?.required">
+                  Genres is required.
+                </span>
+               </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="firstNameId">Image url</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="imageUrlId"
+                     type="text" 
+                     placeholder="Image url (required)"
+                     required imageUrlPattern
+                      [(ngModel)]=movie.movieData.image 
+                     name="imageUrl"
+                     #imageUrlVar="ngModel"
+                     [ngClass]="{'is-invalid': (imageUrlVar.touched || 
+                                                imageUrlVar.dirty ||
+                                                movie.movieData._id !== '0') && 
+                                                !imageUrlVar.valid }" />
+              <span class="invalid-feedback">
+                 <span *ngIf="imageUrlVar.errors?.required">
+                  Image url is required.
+                </span> 
+               </span>
+               <span class="invalid-feedback">
+                <span *ngIf="imageUrlVar.errors?.imageUrlPattern">
+                  Add correct image url.
+                </span>
+               </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="firstNameId">Premired</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="premiredUrlId"
+                     type="date"
+                     placeholder="Premired (required)"
+                     required
+                      [(ngModel)]=movie.movieData.premiered
+                     name="premired"
+                     #premiredVar="ngModel"
+                     [ngClass]="{'is-invalid': (premiredVar.touched || 
+                                                premiredVar.dirty ||
+                                                movie.movieData._id !== '0') && 
+                                                !premiredVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="premiredVar.errors?.required">
+                    Premired is required.
+                </span>
+               </span>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-4">
+              <button class="btn btn-primary mr-3"
+                      style="width:80px"
+                      type="submit"
+                      [title]="editForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                      [disabled]='!editForm.form.valid' >
+                    Save
+              </button>
+              <button class="btn btn-outline-secondary mr-3"
+                      style="width:80px"
+                      type="button"
+                      title="Cancel your edits"
+                      [routerLink]="['/movies']">
+                Cancel
+              </button>
+            </div>
+           </div>
+        </form>
+    </div>
+  </div>
+  
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+

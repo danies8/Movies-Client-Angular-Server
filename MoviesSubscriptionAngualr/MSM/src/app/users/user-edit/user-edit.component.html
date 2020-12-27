@@ -1,0 +1,262 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+      <div class="card-body"
+         *ngIf="user">
+         <form class="form-horizontal" novalidate (ngSubmit)="saveUser()" #editForm="ngForm">
+           <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="firstNameId">First Name</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="firstNameId"
+                     type="text"
+                     placeholder="First name (required)"
+                     required
+                      [(ngModel)]=user.results.userData.firstName
+                     name="firstName"
+                     #firstNameVar="ngModel"
+                     [ngClass]="{'is-invalid': (firstNameVar.touched || 
+                                                firstNameVar.dirty ||
+                                                user.results.userData.id !== '0') && 
+                                                !firstNameVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="firstNameVar.errors?.required">
+                  First name is required.
+                </span>
+               </span>
+            </div>
+          </div>
+    
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="lastNameId">Last name</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="lastNameId"
+                     type="text"
+                     placeholder="Last name (required)"
+                     required
+                      [(ngModel)]=user.results.userData.lastName
+                     name="lastName"
+                     #lastNameVar="ngModel"
+                     [ngClass]="{'is-invalid': (lastNameVar.touched || 
+                                                 lastNameVar.dirty ||
+                                                user.results.userData.id !== '0') && 
+                                                !lastNameVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="lastNameVar.errors?.required">
+                  Last name is required.
+                </span>
+               </span>
+              </div>
+          </div>
+    
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="userNameId">User name</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="userNameId"
+                     type="text"
+                     [disabled] ='isEditMode'  
+                     placeholder="User name (required)"
+                     required isUserExist
+                      [(ngModel)]=user.results.userName
+                     name="uerName"
+                     #userNameVar="ngModel"
+                     [ngClass]="{'is-invalid': (userNameVar.touched || 
+                                                userNameVar.dirty ||
+                                                user.results.userData.id !== '0') && 
+                                                !userNameVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="userNameVar.errors?.required">
+                  User name is required.
+                </span>
+               </span>
+               <span class="invalid-feedback">
+                <span *ngIf="userNameVar.errors?.isUserExist">
+                  User name already exsist.
+                </span>
+               </span>
+            </div>
+          </div>
+    
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="sessionTimeoutId">Session timeout</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="sessionTimeoutId"
+                     type="number"
+                     placeholder="Session timeout (required)"
+                     required
+                      [(ngModel)]=user.results.userData.sessionTimeout
+                     name="sessionTimeout"
+                     #sessionTimeoutVar="ngModel"
+                     [ngClass]="{'is-invalid': (sessionTimeoutVar.touched || 
+                                                sessionTimeoutVar.dirty ||
+                                                user.results.userData.id !== '0') && 
+                                                !sessionTimeoutVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="sessionTimeoutVar.errors?.required">
+                  Session timeout is required.
+                </span>
+               </span>
+            </div>
+          </div>
+    
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="createdDateId">Created date</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="createdDateId"
+                     type="date"
+                     placeholder="Created date (required)"
+                     required
+                      [(ngModel)]=user.results.userData.createdDate
+                     name="createdDate"
+                     #createdDateVar="ngModel"
+                     [ngClass]="{'is-invalid': (createdDateVar.touched || 
+                                                createdDateVar.dirty ||
+                                                user.results.userData.id !== '0') && 
+                                                !createdDateVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="createdDateVar.errors?.required">
+                  "Created date is required.
+                </span>
+               </span>
+            </div>
+          </div>
+    
+    
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="viewSubscriptionsId">View subscriptions</label>
+            <div class="col-md-1">
+              <input class="form-control"
+                     id="viewSubscriptionsId"
+                     type="checkbox"
+                     placeholder="View subscriptions"
+                      [(ngModel)]=viewSubscriptions
+                     name="viewSubscriptions"
+                      />
+             </div>
+
+             <label class="col-md-2 col-form-label"
+                 for="viewMoviesId">View movies</label>
+                <div class="col-md-1">
+                  <input class="form-control"
+                        id="viewMoviesId"
+                        type="checkbox"
+                        placeholder="View movies"
+                          [(ngModel)]=viewMovies
+                        name="viewMovies"
+                          />
+                </div>
+          </div>
+    
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="createSubscriptionsId">Create subscriptions</label>
+            <div class="col-md-1">
+              <input class="form-control"
+                     id="createSubscriptionsId"
+                     type="checkbox"
+                     placeholder="Create subscriptions"
+                      [(ngModel)]=createSubscriptions
+                     name="createSubscriptions"
+                    />
+             </div>
+
+             <label class="col-md-2 col-form-label"
+                   for="createMoviesId">Create movies</label>
+            <div class="col-md-1">
+              <input class="form-control"
+                     id="createMoviesId"
+                     type="checkbox"
+                     placeholder="Create movies"
+                      [(ngModel)]=createMovies
+                     name="createMovies"
+                    />
+             </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="updateSubscriptionsId">Update subscriptions</label>
+            <div class="col-md-1">
+              <input class="form-control"
+                     id="updateSubscriptionsId"
+                     type="checkbox"
+                     placeholder="Update subscriptions"
+                      [(ngModel)]=updateSubscriptions
+                     name="updateSubscriptions"
+                    />
+             </div>
+
+             <label class="col-md-2 col-form-label"
+                   for="updateMoviesId">Update movies</label>
+                  <div class="col-md-1">
+                    <input class="form-control"
+                          id="updateMoviesId"
+                          type="checkbox"
+                          placeholder="Update movies"
+                            [(ngModel)]=updateMovies
+                          name="updateMovies"
+                          />
+                  </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="deleteSubscriptionsId">Delete subscriptions</label>
+            <div class="col-md-1">
+              <input class="form-control"
+                     id="deleteSubscriptionsId"
+                     type="checkbox"
+                     placeholder="Delete subscriptions"
+                      [(ngModel)]=deleteSubscriptions
+                     name="deleteSubscriptions"
+                    />
+             </div>
+             <label class="col-md-2 col-form-label"
+             for="deleteMoviesId">Delete movies</label>
+                <div class="col-md-1">
+                  <input class="form-control"
+                        id="deleteMoviesId"
+                        type="checkbox"
+                        placeholder="Delete movies"
+                          [(ngModel)]=deleteMovies
+                        name="deleteMovies"
+                        />
+                </div>
+          </div>
+
+      <div class="row mb-2">
+        <div class="col-md-4">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px"
+                  type="submit"
+                  [title]="editForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]='!editForm.form.valid' >
+                Save
+          </button>
+          <button class="btn btn-outline-secondary mr-3"
+                  style="width:80px"
+                  type="button"
+                  title="Cancel your edits"
+                  [routerLink]="['/users']">
+            Cancel
+          </button>
+         </div>
+       </div>
+      </form>
+    </div>
+  </div>
+  
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>

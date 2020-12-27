@@ -1,0 +1,109 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+      <div class="card-body"
+      *ngIf="member">
+         <form class="form-horizontal" novalidate (ngSubmit)="saveMember()" #editForm="ngForm">
+           <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="nameId">Name</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="nameId"
+                     type="text"
+                     placeholder="Name (required)"
+                     required
+                     [(ngModel)]=member.member.name
+                     name="name"
+                     #nameVar="ngModel"
+                     [ngClass]="{'is-invalid': (nameVar.touched || 
+                                                nameVar.dirty ||
+                                                member.member._id !== '0') && 
+                                                !nameVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="nameVar.errors?.required">
+                  Name is required.
+                </span>
+               </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="emailId">Email</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="emailId"
+                     type="email" 
+                     placeholder="Email (required)"
+                     required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                      [(ngModel)]=member.member.email
+                     name="email"
+                     #emailVar="ngModel"
+                     [ngClass]="{'is-invalid': (emailVar.touched || 
+                                                emailVar.dirty ||
+                                                member.member._id !== '0') && 
+                                                !emailVar.valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="emailVar.errors?.required">
+                  Email is required.
+                </span>
+                <span *ngIf="emailVar.errors?.pattern">
+                Email is invalid.
+              </span>
+             </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label"
+                   for="cityId">City</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="cityId"
+                     type="text" 
+                     placeholder="City (required)"
+                     required 
+                      [(ngModel)]=member.member.city 
+                     name="city"
+                     #cityVar="ngModel"
+                     [ngClass]="{'is-invalid': (cityVar.touched || 
+                                                cityVar.dirty ||
+                                                member.member._id !== '0') && 
+                                                !cityVar.valid }" />
+              <span class="invalid-feedback">
+                 <span *ngIf="cityVar.errors?.required">
+                  City is required.
+                </span> 
+               </span>
+             </div>
+          </div>
+
+     
+          <div class="row mb-2">
+            <div class="col-md-4">
+              <button class="btn btn-primary mr-3"
+                      style="width:80px"
+                      type="submit"
+                      [title]="editForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                      [disabled]='!editForm.form.valid' >
+                    Save
+              </button>
+              <button class="btn btn-outline-secondary mr-3"
+                      style="width:80px"
+                      type="button"
+                      title="Cancel your edits"
+                      [routerLink]="['/members']">
+                Cancel
+              </button>
+            </div>
+           </div>
+        </form>
+    </div>
+  </div>
+  
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+
